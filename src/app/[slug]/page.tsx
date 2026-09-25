@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAllPosts, getPostBySlug } from '@/lib/posts';
 import { ArrowLeft, Calendar, Clock, Tag, Share2, ArrowUpRight } from 'lucide-react';
+import { SplitGithubButton } from '@/components/SplitGithubButton';
 
 interface Props {
   params: Promise<{
@@ -118,7 +119,7 @@ export default async function PostPage({ params }: Props) {
               architecting fault-tolerant streaming pipelines on AWS MSK, and hardening enterprise
               cloud environments.
             </p>
-            <div className="author-socials">
+            <div className="author-socials" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
               <a
                 href="https://akashdipmahapatra.in"
                 target="_blank"
@@ -127,6 +128,8 @@ export default async function PostPage({ params }: Props) {
               >
                 Visit Main Portfolio <ArrowUpRight size={15} />
               </a>
+
+              <SplitGithubButton />
             </div>
           </div>
         </section>

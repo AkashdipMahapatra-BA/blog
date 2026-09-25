@@ -573,3 +573,104 @@ a:hover {
     text-align: center;
   }
 }
+
+/* ─── Split GitHub Button Animation (Desktop Hover & Mobile Click) ──────── */
+.split-github-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.github-single-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.github-single-btn:hover {
+  background-color: var(--border-subtle);
+  border-color: var(--border-strong);
+  color: var(--accent);
+}
+
+.github-split-actions {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.split-github-wrapper.is-split .github-single-btn {
+  display: none;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.split-github-wrapper.is-split .github-split-actions {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.github-split-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.375rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  animation: popIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.github-split-item.work-item {
+  background-color: var(--bg-surface-secondary);
+  color: var(--text-primary);
+}
+
+.github-split-item.work-item:hover {
+  background-color: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+}
+
+.github-split-item.academic-item {
+  background-color: var(--bg-surface-secondary);
+  color: var(--text-primary);
+}
+
+.github-split-item.academic-item:hover {
+  background-color: #FF3366;
+  color: #FFFFFF;
+  border-color: #FF3366;
+}
