@@ -28,7 +28,6 @@ export function SplitGithubButton() {
       className={`split-github-wrapper ${isOpen ? 'is-split' : ''}`}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
-      onClick={() => setIsOpen((prev) => !prev)}
       role="region"
       aria-label="GitHub Profiles"
     >
@@ -36,6 +35,10 @@ export function SplitGithubButton() {
       <button
         type="button"
         className="github-single-btn"
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen((prev) => !prev);
+        }}
         aria-expanded={isOpen}
         aria-label="View GitHub profiles (Work and Academic)"
         title="View GitHub Profiles (Work & Academic)"
