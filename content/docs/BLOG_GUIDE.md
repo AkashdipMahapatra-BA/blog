@@ -11,7 +11,7 @@
 **Site URL:** `https://blog.akashdipmahapatra.in`
 **Stack:** Next.js 15 (static export), React 19, TypeScript, gray-matter, marked, Orama search
 **Deployment:** GitHub Pages via `out/` static export — no server runtime
-**Author:** Akashdip Mahapatra — Data Engineer & Cloud Automation Specialist | SRE at British Airways
+**Author:** Akashdip Mahapatra — Data Engineer & Cloud Automation Specialist | SRE — Enterprise Aviation Data Platforms
 
 This is a technical engineering blog. Every post is a deep-dive into real production problems, architecture decisions, or incident post-mortems. It is not a tutorial site — it is a practitioner's notebook made public.
 
@@ -76,7 +76,7 @@ slug: "your-url-slug-no-spaces"
 description: "One or two sentences. Shown in post cards and used for SEO meta description."
 publishedAt: "YYYY-MM-DD"
 author: "Akashdip Mahapatra"
-authorRole: "Data Engineer & Cloud Automation Specialist | SRE"
+authorRole: "Data Engineer & Cloud Automation Specialist | SRE — Enterprise Aviation Data Platforms"
 authorAvatar: "/akashdip.jpg"
 tags: ["System Design", "AWS", "Kafka"]
 readingTime: "N min read"
@@ -89,7 +89,7 @@ featured: false
 - `slug` — Lowercase, hyphen-separated, no special characters. Must be unique across all posts.
 - `description` — 1–2 sentences max. Written for a senior engineer audience. Avoid phrases like "In this post" or "Learn how".
 - `publishedAt` — ISO date `YYYY-MM-DD`. Controls sort order on home page (newest first).
-- `tags` — Array of strings. Use existing tags from other posts for consistency. Common tags: `System Design`, `AWS`, `Kafka`, `SRE`, `Architecture`, `Post-Mortem`, `DevOps`, `Data Engineering`, `Streaming`, `CDC`, `MSK`.
+- `tags` — Array of strings. Use existing tags from other posts for consistency. Common tags: `System Design`, `AWS`, `Kafka`, `SRE`, `Architecture`, `Post-Mortem`, `DevOps`, `Data Engineering`, `Streaming`, `CDC`, `MSK`, `Agentic AI`, `RAG`, `FastAPI`, `Vector Databases`, `Python Automation`.
 - `readingTime` — Estimate manually or let the system calculate it (if omitted, auto-calculated at ~200 wpm).
 - `featured` — `true` marks the post as featured; currently shows a "FEATURED" badge. Use sparingly (one at a time max).
 
@@ -217,8 +217,8 @@ The theme-init script in `layout.tsx` reads from localStorage and applies the co
 
 ```
 Name:       Akashdip Mahapatra
-Role:       Data Engineer & Cloud Automation Specialist | SRE
-Avatar:     /akashdip.jpg
+Role:       Data Engineer & Cloud Automation Specialist | SRE — Enterprise Aviation Data Platforms
+            (Global 'Emerging AI Champion' award winner | AI/GenAI practitioner)
 Portfolio:  https://akashdipmahapatra.in
 LinkedIn:   https://www.linkedin.com/in/akashdip2001
 GitHub Work:     https://github.com/AkashdipMahapatra-BA

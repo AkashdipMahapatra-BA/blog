@@ -28,7 +28,7 @@ export default function HomePage() {
               />
               <div>
                 <div className="author-name">Akashdip Mahapatra</div>
-                <div className="author-role">Data Engineer &amp; Cloud Automation Specialist | SRE</div>
+                <div className="author-role">Data Engineer &amp; Cloud Automation Specialist | SRE — Enterprise Aviation Data Platforms</div>
               </div>
             </div>
           </div>

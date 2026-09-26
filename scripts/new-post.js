@@ -38,7 +38,7 @@ slug: "${slug}"
 description: "A short, compelling summary of this post for search engines and preview cards."
 publishedAt: "${today}"
 author: "Akashdip Mahapatra"
-authorRole: "Data Engineer & Cloud Automation Specialist | SRE"
+authorRole: "Data Engineer & Cloud Automation Specialist | SRE — Enterprise Aviation Data Platforms"
 authorAvatar: "/akashdip.jpg"
 tags: ["System Design", "AWS", "DevOps"]
 readingTime: "5 min read"

@@ -4,9 +4,9 @@ slug: "enterprise-event-driven-streaming"
 description: "A comprehensive deep dive into high-throughput Kafka streaming, containerized serverless event processors, schema registries, cross-cluster replication, and hard-earned production reliability lessons."
 publishedAt: "2026-09-25"
 author: "Akashdip Mahapatra"
-authorRole: "Data Engineer & Cloud Automation Specialist | SRE"
+authorRole: "Data Engineer & Cloud Automation Specialist | SRE — Enterprise Aviation Data Platforms"
 authorAvatar: "/akashdip.jpg"
-tags: ["System Design", "AWS", "Kafka", "SRE", "Architecture", "Post-Mortem"]
+tags: ["System Design", "AWS", "Kafka", "SRE", "Architecture", "Post-Mortem", "Agentic AI", "Python Automation"]
 readingTime: "16 min read"
 featured: true
 ---
