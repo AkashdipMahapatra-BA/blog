@@ -53,7 +53,26 @@ function FlowArrow() {
   );
 }
 
-function Pipeline({ step, label, children }: { step: string; label: string; children: ReactNode }) {
+function Pipeline({ step, label, children, glow }: { step: string; label: string; children: ReactNode; glow?: boolean }) {
+  const row = (
+    <div
+      className="hld-pipeline-row"
+      style={{
+        background: "var(--bg-surface-secondary)",
+        border: glow ? "none" : "1px solid var(--border-subtle)",
+        borderRadius: "0.55rem",
+        padding: "0.75rem 0.85rem",
+        display: "flex",
+        alignItems: "center",
+        gap: "0.45rem",
+        flexWrap: "wrap",
+        position: "relative",
+        zIndex: glow ? 1 : undefined,
+      }}
+    >
+      {children}
+    </div>
+  );
   return (
     <div style={{ marginBottom: "1.1rem" }}>
       <div style={{
@@ -67,21 +86,7 @@ function Pipeline({ step, label, children }: { step: string; label: string; chil
       }}>
         {step} — {label}
       </div>
-      <div
-        className="hld-pipeline-row"
-        style={{
-          background: "var(--bg-surface-secondary)",
-          border: "1px solid var(--border-subtle)",
-          borderRadius: "0.55rem",
-          padding: "0.75rem 0.85rem",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.45rem",
-          flexWrap: "wrap",
-        }}
-      >
-        {children}
-      </div>
+      {glow ? <div className="hld-pipeline-glow">{row}</div> : row}
     </div>
   );
 }
@@ -115,7 +120,7 @@ function ArchDiagram() {
         <FlowBox label="React Hydrates"  sub="SPA in browser" color="cyan"  />
       </Pipeline>
 
-      <Pipeline step="④" label="Semantic Search · 100 % In-Browser">
+      <Pipeline step="④" label="Semantic Search · 100 % In-Browser" glow={true}>
         <FlowBox label="User types"      sub="any keystroke"         color="blue"  />
         <FlowArrow />
         <FlowBox label="Orama Engine"    sub="fuzzy + field boost"   color="cyan"  href="https://orama.com/" />
@@ -197,6 +202,31 @@ export function HLDModal() {
         @media (max-width: 480px) {
           .hld-why-entry  { display: flex !important; flex-direction: column !important; gap: 0.15rem !important; }
           .hld-why-label  { white-space: normal !important; }
+        }
+        /* ④ Semantic Search — continuous rainbow border (same gradient as search bar) */
+        @keyframes spinBorderHLD { to { transform: rotate(360deg); } }
+        .hld-pipeline-glow {
+          position: relative;
+          padding: 1.5px;
+          border-radius: 0.65rem;
+          overflow: hidden;
+        }
+        .hld-pipeline-glow::before {
+          content: '';
+          position: absolute;
+          top: -50%; left: -50%;
+          width: 200%; height: 200%;
+          background: conic-gradient(
+            from 0deg,
+            rgba(66,  133, 244, 0.6),
+            rgba(155,  81, 224, 0.6),
+            rgba(233,  30,  99, 0.6),
+            rgba(16,  185, 129, 0.6),
+            rgba(250, 204,  21, 0.6),
+            rgba(66,  133, 244, 0.6)
+          );
+          animation: spinBorderHLD 4s linear infinite;
+          z-index: 0;
         }
       `}</style>
 
