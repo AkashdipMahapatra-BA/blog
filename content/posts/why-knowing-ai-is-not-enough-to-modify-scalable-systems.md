@@ -127,6 +127,9 @@ When the teammate attempted a second pass with AI, the AI generated a cleaner ma
 
 The result? The Jira remediation badge would have been stamped across 20 individual microservice pages (where it made no sense), while the main executive dashboard—the exact page reviewed by leadership—remained completely blank.
 
+![GitHub Pull Request review feedback catching the architectural target page mismatch between microservice spoke pages and the central executive master dashboard](/images/ai-code-review-spoke-vs-master-dashboard.png)
+*Figure 2: The follow-up code review: while the AI successfully cleaned up the code and built the styled alert macro, it wired the component to individual pipeline spoke pages instead of the centralized Master Dashboard.*
+
 ### 5. Silent Boundary Failures: Escaping and Contracts
 The AI queried Jira issue summaries and descriptions, embedding them directly into Confluence XHTML storage strings:
 
@@ -136,6 +139,9 @@ body = f"<tr><td><strong>Description</strong></td><td>{issue['description']}</td
 ```
 
 In enterprise environments, engineers frequently write code snippets, shell commands, or HTML tags inside Jira descriptions (e.g., `<URL>`, `a & b`, `<lambda_arn>`). Injected raw into Confluence's strict XML storage format, unescaped `&`, `<`, and `>` characters cause the Atlassian API to immediately throw a fatal `400 Bad Request: Error parsing XML`.
+
+![Real-world GitHub code review showing AI-generated failure modes including unrelated file modifications, incorrect workflow targets, and Confluence page overwrite hazard](/images/ai-code-review-initial-request-changes.png)
+*Figure 1: The initial GitHub code review detailing the 6 critical architectural and boundary issues introduced by ungrounded AI generation.*
 
 ---
 
