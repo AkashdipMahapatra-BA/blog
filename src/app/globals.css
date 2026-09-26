@@ -467,6 +467,30 @@ a:hover {
   margin: 3rem 0;
 }
 
+/* ─── Images & Figures ─────────────────────────────────────────────────── */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  margin: 1.5rem auto;
+  display: block;
+}
+
+.prose figure {
+  margin: 2.25rem 0;
+  text-align: center;
+}
+
+.prose figure figcaption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.65rem;
+  font-style: italic;
+  text-align: center;
+}
+
 /* ─── Code & Architecture Diagrams ──────────────────────────────────────── */
 .prose pre {
   background-color: var(--bg-code);
