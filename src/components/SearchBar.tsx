@@ -141,9 +141,14 @@ export function SearchBar({ posts }: SearchBarProps) {
           padding: "0.65rem 1rem",
           transition: "box-shadow 0.2s ease, border-color 0.2s ease",
           boxShadow: isOpen ? "0 0 0 3px var(--accent-subtle)" : "var(--shadow-sm)",
+          position: "relative",
+          overflow: "hidden",
         }}
         onClick={() => inputRef.current?.focus()}
       >
+        {/* One-time shimmer on page/component mount — three-sweep light burst
+            adapted from the portfolio ShimmerButton pattern */}
+        <span className="search-shimmer-layer" aria-hidden="true" />
         <Search
           size={16}
           style={{ color: "var(--text-muted)", flexShrink: 0 }}
@@ -157,7 +162,7 @@ export function SearchBar({ posts }: SearchBarProps) {
           placeholder={
             isIndexing
               ? "Building search index..."
-              : "Search posts by meaning, not just keywords..."
+              : "Search by meaning, not just keywords..."
           }
           disabled={isIndexing}
           style={{
@@ -229,7 +234,7 @@ export function SearchBar({ posts }: SearchBarProps) {
               letterSpacing: "0.04em",
             }}
           >
-            {results.length} result{results.length !== 1 ? "s" : ""} — ranked by relevance
+            {results.length} result{results.length !== 1 ? "s" : ""}
           </div>
 
           {results.map((result) => (

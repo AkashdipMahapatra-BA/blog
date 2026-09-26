@@ -610,6 +610,47 @@ a:hover {
   gap: 1.25rem;
 }
 
+/* ─── Search Box — one-time shimmer on page load ────────────────────────────── */
+/* Adapted from the portfolio ShimmerButton pattern: 3-sweep light burst then
+   holds invisible. skewX(-18deg) is slightly less aggressive than the portfolio's
+   -20deg to match the blog's cleaner, more structured visual language. */
+@keyframes searchShimmer {
+  0%     { transform: translateX(-150%) skewX(-18deg); opacity: 1; }
+  18%    { transform: translateX(150%)  skewX(-18deg); opacity: 1; }
+  18.01% { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
+  21%    { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
+  21.01% { transform: translateX(-150%) skewX(-18deg); opacity: 1; }
+  39%    { transform: translateX(150%)  skewX(-18deg); opacity: 1; }
+  39.01% { transform: translateX(150%)  skewX(-18deg); opacity: 1; }
+  57%    { transform: translateX(-150%) skewX(-18deg); opacity: 1; }
+  57.01% { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
+  100%   { opacity: 0;                                               }
+}
+
+/* Light mode: accent-blue shimmer — visible on the white search surface */
+.search-shimmer-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(37, 99, 235, 0.11) 50%,
+    transparent 70%
+  );
+  animation: searchShimmer 4s ease-in-out 0.4s 1 forwards;
+}
+
+/* Dark mode: portfolio-style cyan shimmer on the dark surface */
+[data-theme="dark"] .search-shimmer-layer {
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(6, 182, 212, 0.22) 50%,
+    transparent 70%
+  );
+}
+
 /* ─── Responsive — Tablet (≤768px) ──────────────────────────────────────── */
 @media (max-width: 768px) {
   .post-card    { padding: 1.5rem; }
