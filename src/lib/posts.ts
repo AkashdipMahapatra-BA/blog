@@ -77,7 +77,13 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   const { data, content } = matter(fileContents);
 
   const readingTime = data.readingTime || calculateReadingTime(content);
-  const htmlContent = await marked.parse(content);
+  const rawHtml = await marked.parse(content);
+  // Transform <!-- checkpoint --> markers into split divs consumed by ArticleProse.
+  // Table tags get a scroll wrapper so wide tables don't overflow on mobile.
+  const htmlContent = rawHtml
+    .replace(/<!-- checkpoint -->/gi, '<div class="article-checkpoint"></div>')
+    .replace(/<table/g, '<div class="table-scroll"><table')
+    .replace(/<\/table>/g, '</table></div>');
 
   return {
     slug: data.slug || targetFile.replace(/\.md$/, ''),

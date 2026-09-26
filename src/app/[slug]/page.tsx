@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { getAllPosts, getPostBySlug } from '@/lib/posts';
 import { ArrowLeft, Calendar, Clock, Tag, Share2, ArrowUpRight } from 'lucide-react';
 import { SplitGithubButton } from '@/components/SplitGithubButton';
+import { ArticleProse } from '@/components/ArticleProse';
 
 interface Props {
   params: Promise<{
@@ -69,7 +70,7 @@ export default async function PostPage({ params }: Props) {
         <div className="container">
           <Link href="/" className="back-link">
             <ArrowLeft size={16} />
-            <span>Back to All Technical Notes</span>
+            <span>More Engineering Notes</span>
           </Link>
 
           <h1 className="article-title">{post.title}</h1>
@@ -100,10 +101,7 @@ export default async function PostPage({ params }: Props) {
 
       {/* ─── Article Content ───────────────────────────────────────────── */}
       <div className="container">
-        <div
-          className="prose"
-          dangerouslySetInnerHTML={{ __html: post.htmlContent }}
-        />
+        <ArticleProse htmlContent={post.htmlContent} slug={post.slug} />
 
         {/* ─── Author Card at Bottom ───────────────────────────────────── */}
         <section className="article-author-card">

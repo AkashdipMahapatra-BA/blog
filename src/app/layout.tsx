@@ -6,8 +6,8 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://blog.akashdipmahapatra.in'),
   title: {
-    default: 'Akashdip Mahapatra | Engineering Blog & Architecture Notes',
-    template: '%s | Akashdip Mahapatra',
+    default: 'Akashdip | Engineering Notes',
+    template: '%s · Akashdip',
   },
   description:
     'Deep-dive technical essays on event-driven streaming, AWS MSK architectures, SRE operations, distributed database CDC, and incident post-mortems.',

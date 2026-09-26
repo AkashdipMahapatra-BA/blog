@@ -186,6 +186,8 @@ a:hover {
   max-width: 42rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .hero-meta-bar {
@@ -324,6 +326,8 @@ a:hover {
   color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.6;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .tags-row {
@@ -401,6 +405,8 @@ a:hover {
   line-height: 1.8;
   color: var(--text-secondary);
   padding: 2.5rem 0 5rem;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
@@ -408,6 +414,7 @@ a:hover {
   font-weight: 700;
   letter-spacing: -0.02em;
   scroll-margin-top: 5rem;
+  text-align: left;         /* headings always left — justify looks wrong on short lines */
 }
 
 .prose h2 {
@@ -450,6 +457,7 @@ a:hover {
   border-radius: 0 0.5rem 0.5rem 0;
   color: var(--text-primary);
   font-style: normal;
+  text-align: left;           /* blockquotes read better left-aligned */
 }
 
 .prose hr {
@@ -472,6 +480,7 @@ a:hover {
   margin: 1.75rem 0;
   color: var(--text-primary);
   box-shadow: var(--shadow-sm);
+  text-align: left;           /* never justify monospace */
 }
 
 .prose code {
@@ -518,6 +527,23 @@ a:hover {
 
 [data-theme="dark"] .prose tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ─── Responsive Table Scroll (wrapper div injected by posts.ts at build time) ── */
+.prose .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.prose .table-scroll table {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  min-width: 400px;
+  width: 100%;
 }
 
 /* ─── Author Box at Article Bottom ──────────────────────────────────────── */
@@ -584,17 +610,104 @@ a:hover {
   gap: 1.25rem;
 }
 
+/* ─── Responsive — Tablet (≤768px) ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .post-card    { padding: 1.5rem; }
+  .hero-section { padding: 2.75rem 0 2rem; }
+}
+
+/* ─── Responsive — Mobile (≤640px) ──────────────────────────────────────── */
 @media (max-width: 640px) {
-  .hero-title {
-    font-size: 1.75rem;
-  }
-  .article-title {
-    font-size: 1.85rem;
-  }
+  /* Typography */
+  .hero-title      { font-size: 1.75rem; }
+  .hero-subtitle   { font-size: 1.05rem; }
+  .article-title   { font-size: 1.85rem; }
+  .post-card-title { font-size: 1.25rem; }
+
+  /* Spacing */
+  .hero-section   { padding: 2.25rem 0 1.75rem; }
+  .article-header { padding: 2rem 0 1.5rem; }
+  .post-card      { padding: 1.25rem; }
+  .filter-bar     { padding: 1.25rem 0 1.75rem; }
+
+  /* Layout */
   .article-author-card {
     flex-direction: column;
     text-align: center;
   }
+
+  /* ── Touch targets ≥ 44px on mobile ─────────────────────────────── */
+  .theme-toggle-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .filter-btn {
+    padding: 0.65rem 1rem;
+    min-height: 2.75rem;
+  }
+  .back-link {
+    padding: 0.5rem 0;
+    margin-bottom: 1.25rem;
+  }
+  .nav-link {
+    padding: 0.65rem 0.75rem;
+  }
+
+  /* ── Author card — social row ─────────────────────────────────── */
+  .author-socials {
+    justify-content: center;
+    padding-top: 0.85rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--border-subtle);
+    gap: 0.6rem;
+  }
+  /* Portfolio text link gets its own full row; LinkedIn + GitHub sit together below */
+  .author-socials .read-more-link {
+    flex-basis: 100%;
+    justify-content: center;
+  }
+  .author-linkedin-btn {
+    padding: 0.65rem 0.9rem;
+    min-height: 2.75rem;
+    font-size: 0.82rem;
+  }
+  .github-single-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+/* ─── Responsive — Small mobile (≤480px) ────────────────────────────────── */
+@media (max-width: 480px) {
+  /* Typography */
+  .hero-title      { font-size: 1.5rem; }
+  .hero-subtitle   { font-size: 1rem; }
+  .article-title   { font-size: 1.6rem; }
+  .post-card-title { font-size: 1.15rem; }
+  .prose h2        { font-size: 1.4rem; }
+  .prose h3        { font-size: 1.15rem; }
+  .author-role     { font-size: 0.72rem; }
+
+  /* Spacing */
+  .container    { padding: 0 1rem; }
+  .post-card    { padding: 1rem; }
+  .hero-section { padding: 1.75rem 0 1.5rem; }
+  .filter-bar   { gap: 0.35rem; padding: 0.9rem 0 1.4rem; }
+  .posts-grid   { gap: 1.25rem; padding-bottom: 3rem; }
+
+  /* Header: hide badge to prevent overflow on narrow phones */
+  .brand-badge { display: none; }
+}
+
+/* ─── Responsive — Very small phones (≤360px, iPhone SE 1st-gen width) ───── */
+@media (max-width: 360px) {
+  .hero-title { font-size: 1.35rem; }
+  .brand-link { font-size: 0.95rem; }
+
+  /* Show icon-only on the Portfolio nav link — prevents header overflow at 320px.
+     The <a> has title="Visit Portfolio" so the action remains accessible. */
+  .nav-link span { display: none; }
+  .nav-link      { padding: 0.65rem 0.5rem; }
 }
 
 /* ─── Split GitHub Button Animation (Desktop Hover & Mobile Click) ──────── */

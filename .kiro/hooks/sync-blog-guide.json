@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Sync BLOG_GUIDE on source changes",
+      "trigger": "PostFileSave",
+      "description": "Reminds the agent to keep BLOG_GUIDE.md in sync whenever a component, CSS, or lib file is saved",
+      "matcher": "src/(components|app|lib)/.*\\.(tsx|ts|css)$",
+      "action": {
+        "type": "agent",
+        "prompt": "A source file in src/ was just saved. Check whether the change adds, removes, or significantly modifies any of the following — if yes, update content/docs/BLOG_GUIDE.md to reflect the current state before finishing:\n- A component in src/components/ (update Section 2 file tree and Section 6 CSS classes table)\n- A new CSS class or responsive breakpoint in globals.css (update Section 6 breakpoints table)\n- A new npm script in package.json (update Section 9 deployment commands)\n- A new authoring convention or markdown feature in posts.ts (update Section 5 writing style)\n\nIf the saved file is a minor bug fix or style tweak with no structural impact on authoring workflow, no update is needed. Use your judgement — the guide documents HOW TO USE the blog system, not every implementation detail."
+      }
+    }
+  ]
+}

@@ -226,6 +226,8 @@ Master operational entities—such as stand allocations, aircraft towing schedul
 
 ---
 
+<!-- checkpoint -->
+
 ### Flow 4: Distributed Workforce Planning & Crew Coordination Streams
 
 Coordinating cabin crew, flight crew, and ground operations requires synthesizing rosters, duty hour limits, and real-time gate assignments.
@@ -298,6 +300,8 @@ We engineered a **hybrid replication and replay topology** using **MSK MirrorMak
 2. **Eliminated "Works on My Machine" Defects:** Integration bugs are identified in DEV/QA rather than surfacing during high-pressure UAT windows.
 
 ---
+
+<!-- checkpoint -->
 
 ## Part II: Production Reliability & Hard-Earned Engineering Lessons
 
