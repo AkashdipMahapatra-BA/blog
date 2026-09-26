@@ -129,73 +129,72 @@ export function SearchBar({ posts }: SearchBarProps) {
       ref={wrapperRef}
       style={{ position: "relative", width: "100%", maxWidth: "36rem" }}
     >
-      {/* ── Search Input ────────────────────────────────── */}
+      {/* ── Search Input — conic-gradient rainbow border (Gemini-style) ── */}
       <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "0.6rem",
-          background: "var(--bg-surface)",
-          border: "1px solid var(--border-strong)",
-          borderRadius: "0.65rem",
-          padding: "0.65rem 1rem",
-          transition: "box-shadow 0.2s ease, border-color 0.2s ease",
-          boxShadow: isOpen ? "0 0 0 3px var(--accent-subtle)" : "var(--shadow-sm)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-        onClick={() => inputRef.current?.focus()}
+        className="search-border-glow"
+        style={{ boxShadow: isOpen ? "0 0 0 4px var(--accent-subtle)" : undefined }}
       >
-        {/* One-time shimmer on page/component mount — three-sweep light burst
-            adapted from the portfolio ShimmerButton pattern */}
-        <span className="search-shimmer-layer" aria-hidden="true" />
-        <Search
-          size={16}
-          style={{ color: "var(--text-muted)", flexShrink: 0 }}
-        />
-        <input
-          ref={inputRef}
-          type="text"
-          value={query}
-          onChange={(e) => handleSearch(e.target.value)}
-          onFocus={() => results.length > 0 && setIsOpen(true)}
-          placeholder={
-            isIndexing
-              ? "Building search index..."
-              : "Search by meaning, not just keywords..."
-          }
-          disabled={isIndexing}
+        <div
           style={{
-            flex: 1,
-            background: "none",
-            border: "none",
-            outline: "none",
-            color: "var(--text-primary)",
-            fontSize: "0.92rem",
-            fontFamily: "inherit",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            background: "var(--bg-surface)",
+            borderRadius: "0.65rem",
+            padding: "0.65rem 1rem",
+            position: "relative",
+            zIndex: 1,
           }}
-          aria-label="Search blog posts"
-          aria-expanded={isOpen}
-          aria-autocomplete="list"
-          role="combobox"
-        />
-        {query && (
-          <button
-            onClick={clearSearch}
-            aria-label="Clear search"
+          onClick={() => inputRef.current?.focus()}
+        >
+          <Search
+            size={16}
+            style={{ color: "var(--text-muted)", flexShrink: 0 }}
+          />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => handleSearch(e.target.value)}
+            onFocus={() => results.length > 0 && setIsOpen(true)}
+            placeholder={
+              isIndexing
+                ? "Building search index..."
+                : "Search by meaning, not just keywords..."
+            }
+            disabled={isIndexing}
             style={{
+              flex: 1,
               background: "none",
               border: "none",
-              cursor: "pointer",
-              color: "var(--text-muted)",
-              display: "flex",
-              padding: "0.1rem",
-              borderRadius: "0.25rem",
+              outline: "none",
+              color: "var(--text-primary)",
+              fontSize: "0.92rem",
+              fontFamily: "inherit",
             }}
-          >
-            <X size={14} />
-          </button>
-        )}
+            aria-label="Search blog posts"
+            aria-expanded={isOpen}
+            aria-autocomplete="list"
+            role="combobox"
+          />
+          {query && (
+            <button
+              onClick={clearSearch}
+              aria-label="Clear search"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "var(--text-muted)",
+                display: "flex",
+                padding: "0.1rem",
+                borderRadius: "0.25rem",
+              }}
+            >
+              <X size={14} />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* ── Results Dropdown ────────────────────────────── */}

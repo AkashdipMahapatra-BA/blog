@@ -610,45 +610,40 @@ a:hover {
   gap: 1.25rem;
 }
 
-/* ─── Search Box — one-time shimmer on page load ────────────────────────────── */
-/* Adapted from the portfolio ShimmerButton pattern: 3-sweep light burst then
-   holds invisible. skewX(-18deg) is slightly less aggressive than the portfolio's
-   -20deg to match the blog's cleaner, more structured visual language. */
-@keyframes searchShimmer {
-  0%     { transform: translateX(-150%) skewX(-18deg); opacity: 1; }
-  18%    { transform: translateX(150%)  skewX(-18deg); opacity: 1; }
-  18.01% { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
-  21%    { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
-  21.01% { transform: translateX(-150%) skewX(-18deg); opacity: 1; }
-  39%    { transform: translateX(150%)  skewX(-18deg); opacity: 1; }
-  39.01% { transform: translateX(150%)  skewX(-18deg); opacity: 1; }
-  57%    { transform: translateX(-150%) skewX(-18deg); opacity: 1; }
-  57.01% { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
-  100%   { opacity: 0;                                               }
+/* ─── Search Box — rainbow conic-gradient border animation ──────────────────── */
+/* Same technique as the portfolio's edu-btn-agentic-glow button:
+   a 200×200% conic-gradient disc spins behind a 1.5px-padded wrapper.
+   1.5px is thinner than the portfolio's 2px — suits the search-box scale. */
+@keyframes spinBorderSearch {
+  to { transform: rotate(360deg); }
 }
 
-/* Light mode: accent-blue shimmer — visible on the white search surface */
-.search-shimmer-layer {
+.search-border-glow {
+  position: relative;
+  padding: 1.5px;
+  border-radius: 0.65rem;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(66, 133, 244, 0.18), 0 0 22px rgba(155, 81, 224, 0.10);
+}
+
+.search-border-glow::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(37, 99, 235, 0.11) 50%,
-    transparent 70%
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    #4285f4,
+    #9b51e0,
+    #e91e63,
+    #10b981,
+    #facc15,
+    #4285f4
   );
-  animation: searchShimmer 4s ease-in-out 0.4s 1 forwards;
-}
-
-/* Dark mode: portfolio-style cyan shimmer on the dark surface */
-[data-theme="dark"] .search-shimmer-layer {
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(6, 182, 212, 0.22) 50%,
-    transparent 70%
-  );
+  animation: spinBorderSearch 4s linear infinite;
+  z-index: 0;
 }
 
 /* ─── Responsive — Tablet (≤768px) ──────────────────────────────────────── */

@@ -16,7 +16,7 @@ const palette: Record<BoxColor, { bg: string; border: string; text: string }> = 
 };
 
 // ─── Diagram primitives ───────────────────────────────────────────────────────
-function FlowBox({ label, sub, color }: { label: string; sub: string; color: BoxColor }) {
+function FlowBox({ label, sub, color, href }: { label: string; sub: string; color: BoxColor; href?: string }) {
   const c = palette[color];
   return (
     <div style={{
@@ -28,7 +28,11 @@ function FlowBox({ label, sub, color }: { label: string; sub: string; color: Box
       borderRadius: "0.45rem",
     }}>
       <div style={{ fontWeight: 700, color: c.text, fontSize: "0.78rem", lineHeight: 1.3 }}>
-        {label}
+        {href ? (
+          <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: c.text, textDecoration: "none" }}>
+            {label} <span style={{ fontSize: "0.7rem", opacity: 0.8 }}>↗</span>
+          </a>
+        ) : label}
       </div>
       <div style={{ color: "var(--text-muted)", fontSize: "0.67rem", marginTop: "0.15rem", lineHeight: 1.4 }}>
         {sub}
@@ -114,7 +118,7 @@ function ArchDiagram() {
       <Pipeline step="④" label="Semantic Search · 100 % In-Browser">
         <FlowBox label="User types"      sub="any keystroke"         color="blue"  />
         <FlowArrow />
-        <FlowBox label="Orama Engine"    sub="fuzzy + field boost"   color="cyan"  />
+        <FlowBox label="Orama Engine"    sub="fuzzy + field boost"   color="cyan"  href="https://orama.com/" />
         <FlowArrow />
         <FlowBox label="Ranked Results"  sub="title×3 · tag×2 · desc×1" color="green" />
       </Pipeline>
