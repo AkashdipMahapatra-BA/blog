@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Dark background — keeps icon visible in light browser tab chrome -->
+  <rect width="24" height="24" rx="4" fill="#0F172A"/>
+  <!-- π symbol: same stroke geometry as the portfolio icon.svg,
+       scaled left to leave room for the blog-lines indicator.
+       Uses blog's accent blue (#2563EB) vs portfolio's cyan (#06B6D4)
+       — subtle differentiation while keeping the brand family. -->
+  <path d="M2 5.8c0-1.5 1.1-2.8 2.5-2.8h10" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="6.5" x2="6.5" y1="3" y2="19" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14.5 19c-1.4 0-2.5-1.1-2.5-2.5V3" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Blog-notes indicator: 3 horizontal lines on the right side.
+       The shorter middle line mimics real paragraph text rhythm.
+       Uses portfolio's cyan so the two sites share a colour family. -->
+  <line x1="17.5" x2="22" y1="8"  y2="8"  stroke="#06B6D4" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="17.5" x2="21" y1="12" y2="12" stroke="#06B6D4" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="17.5" x2="22" y1="16" y2="16" stroke="#06B6D4" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

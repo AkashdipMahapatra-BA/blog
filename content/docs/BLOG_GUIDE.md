@@ -32,11 +32,14 @@ blog.akashdipmahapatra.in/
 │   │   └── [slug]/
 │   │       └── page.tsx    ← Individual post page
 │   ├── components/
-│   │   ├── Header.tsx      ← Site header with Portfolio link + ThemeToggle
-│   │   ├── Footer.tsx      ← Footer with GitHub, LinkedIn, Portfolio links
-│   │   ├── SearchBar.tsx   ← Client-side Orama semantic search component
-│   │   ├── SplitGithubButton.tsx  ← Hover-reveal dual GitHub link button
-│   │   └── ThemeToggle.tsx ← Light/dark toggle (localStorage persisted)
+│   │   ├── Header.tsx           ← Site header with Portfolio link + ThemeToggle
+│   │   ├── Footer.tsx           ← Footer with GitHub, LinkedIn, email links
+│   │   ├── SearchBar.tsx        ← Client-side Orama semantic search component
+│   │   ├── SplitGithubButton.tsx  ← Hover/tap-reveal dual GitHub link button
+│   │   ├── ThemeToggle.tsx      ← Light/dark toggle (localStorage persisted)
+│   │   ├── HLDModal.tsx         ← "HLD ↗" button + architecture diagram modal
+│   │   └── ArticleProse.tsx     ← Client component: renders post HTML split at
+│   │                               checkpoints, resume banner, bottom back nav
 │   └── lib/
 │       ├── posts.ts        ← File system post loader, sorted by date desc
 │       └── types.ts        ← TypeScript interfaces (PostMeta, Post)
@@ -47,7 +50,7 @@ blog.akashdipmahapatra.in/
 ├── scripts/
 │   └── new-post.js         ← CLI helper: `npm run new-post "Your Title Here"`
 ├── next.config.mjs         ← output: 'export', trailingSlash: true
-└── package.json
+└── package.json            ← scripts: dev, build, start, clean, new-post
 ```
 
 ---
@@ -226,11 +229,27 @@ All styles live in `src/app/globals.css`. **Do not add inline styles or Tailwind
 | `.post-card` | Home page article card with hover lift |
 | `.tag-badge` | Inline tag pill (e.g., `#Kafka`) |
 | `.read-more-link` | Animated arrow link at card bottom |
-| `.prose` | Markdown content container with full typography styles |
+| `.prose` | Markdown content container — typography, justify, hyphens |
 | `.article-header` | Full-width post title + meta bar area |
 | `.article-author-card` | Author bio box at post bottom |
 | `.hero-section` | Home page header area |
 | `.filter-bar` | Tag filter pill row |
+| `.new-badge` | Pulsing green "✦ NEW" badge on the most recent post card |
+| `.table-scroll` | Horizontal-scroll wrapper injected around `<table>` by `posts.ts` |
+| `.hld-pipeline-row` | Flex row inside HLDModal pipeline sections; stacks to column at ≤580px |
+
+### Responsive Breakpoints
+
+All breakpoints live at the bottom of `globals.css`. Do not add component-level media queries elsewhere.
+
+| Breakpoint | Applies when | Key changes |
+|---|---|---|
+| `≤768px` | Tablet | Card padding, hero section spacing |
+| `≤640px` | Mobile | Typography scale, touch targets (44px), author card layout |
+| `≤480px` | Small mobile | Tighter container padding (1rem), badge hidden, prose headings smaller |
+| `≤360px` | iPhone SE | Portfolio nav collapses to icon-only to prevent header overflow |
+
+Touch target minimum is **44px** (Apple HIG). Every interactive element at `≤640px` must meet this.
 
 When adding new UI, always add CSS variables to both `:root` (light) and `[data-theme="dark"]` blocks.
 
@@ -271,16 +290,35 @@ These values are defaults in `src/lib/posts.ts`. They should appear exactly as a
 
 The site uses `trailingSlash: true` and `output: 'export'` — every page is a static HTML file. There is no server. No API routes work at runtime.
 
+### Dev server cache issues
+
+If you see a webpack `RuntimeTypeError` or "Cannot find module" in the dev server, the `.next` cache is stale (common when the project lives in a OneDrive-synced folder). Fix with:
+
+```bash
+npm run clean   # deletes .next via Node.js fs.rmSync — works even on OneDrive paths
+npm run dev
+```
+
+**Long-term fix:** move the project outside any cloud-synced folder (e.g. `C:\Projects\`) — OneDrive holds file locks on `.next` while the dev server is running, which corrupts HMR chunk references.
+
 ---
 
-## 10. Search System
+## 10. Search & Discovery
+
+### Semantic Search (Orama)
 
 The blog uses **Orama** for client-side semantic search — no backend, no API keys, no extra cost.
 
 - Search index is built at page load from the live post list
-- Search supports fuzzy matching + weighted field relevance (title > tags > description)
+- Fuzzy matching (1-typo tolerance) + weighted field relevance: title ×3, tags ×2, description ×1
 - The `SearchBar` component is a `"use client"` component rendered on the home page
 - Future: add embedding-based semantic vector search via `@orama/plugin-embeddings`
+
+### Architecture HLD Modal
+
+The `HLDModal` component renders the **"HLD ↗"** button immediately to the right of the search bar. Clicking it opens a modal explaining the blog's full technical architecture across four pipeline stages (content, deploy, request lifecycle, semantic search) plus a comparison of why Orama was chosen over Qdrant/Pinecone/Neo4j.
+
+This modal is intentionally designed for a recruiter/HR audience — it demonstrates architectural thinking without requiring the reader to open a post.
 
 ---
 
@@ -298,4 +336,4 @@ If all five answers are yes, publish it.
 
 ---
 
-*Last updated: 2026-09-26 | Maintained by: Akashdip Mahapatra*
+*Last updated: 2026-09-26 — reading progress system, mobile responsive overhaul, HLD modal | Maintained by: Akashdip Mahapatra*
