@@ -1,18 +1,19 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { getAllPosts, getAllTags } from '@/lib/posts';
-import { ArrowRight, Calendar, Clock, Tag } from 'lucide-react';
+import { ArrowRight, Calendar, Clock } from 'lucide-react';
+import { SearchBar } from '@/components/SearchBar';
 
 export default function HomePage() {
-  const posts = getAllPosts();
+  const posts = getAllPosts(); // already sorted newest-first
   const tags = getAllTags();
+  const newestSlug = posts[0]?.slug;
 
   return (
     <div>
       {/* ─── Hero Section ──────────────────────────────────────────────── */}
       <section className="hero-section">
         <div className="container">
-          <h1 className="hero-title">Engineering Architecture & Systems Notes</h1>
+          <h1 className="hero-title">Engineering Architecture &amp; Systems Notes</h1>
           <p className="hero-subtitle">
             Deep-dive explorations into event-driven stream processing, distributed cloud
             infrastructure, zero-downtime reliability engineering, and real-world incident post-mortems.
@@ -27,19 +28,37 @@ export default function HomePage() {
               />
               <div>
                 <div className="author-name">Akashdip Mahapatra</div>
-                <div className="author-role">Data Engineer & Cloud Automation Specialist | SRE</div>
+                <div className="author-role">Data Engineer &amp; Cloud Automation Specialist | SRE</div>
               </div>
             </div>
+          </div>
+
+          {/* ─── Search Bar ────────────────────────────────────────────── */}
+          <div style={{ marginTop: '1.75rem' }}>
+            <SearchBar posts={posts} />
           </div>
         </div>
       </section>
 
       {/* ─── Articles List ────────────────────────────────────────────── */}
       <div className="container" style={{ paddingTop: '2.5rem' }}>
+        {/* Tag filter row (static — for future interactive filtering) */}
+        {tags.length > 1 && (
+          <div className="filter-bar">
+            {tags.map((tag) => (
+              <span key={tag} className="filter-btn">{tag}</span>
+            ))}
+          </div>
+        )}
+
         <div className="posts-grid">
           {posts.map((post) => (
             <article key={post.slug} className="post-card">
               <div className="post-card-meta">
+                {/* NEW badge for the most recently published post */}
+                {post.slug === newestSlug && (
+                  <span className="new-badge">✦ NEW</span>
+                )}
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
                   <Calendar size={14} />
                   {post.publishedAt}

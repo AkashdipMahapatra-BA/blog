@@ -282,6 +282,29 @@ a:hover {
   flex-wrap: wrap;
 }
 
+/* ── "NEW" badge on most recent post ──────────────────────────────────── */
+.new-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.55rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  animation: newPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes newPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+  50%       { box-shadow: 0 0 16px rgba(16, 185, 129, 0.7); }
+}
+
+
 .post-card-title {
   font-size: 1.5rem;
   font-weight: 700;
