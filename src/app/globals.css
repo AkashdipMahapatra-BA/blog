@@ -187,7 +187,9 @@ a:hover {
   line-height: 1.6;
   margin-bottom: 1.5rem;
   text-align: justify;
-  hyphens: auto;
+  text-justify: inter-word;
+  hyphens: manual;
+  overflow-wrap: break-word;
 }
 
 .hero-meta-bar {
@@ -327,7 +329,9 @@ a:hover {
   font-size: 1rem;
   line-height: 1.6;
   text-align: justify;
-  hyphens: auto;
+  text-justify: inter-word;
+  hyphens: manual;
+  overflow-wrap: break-word;
 }
 
 .tags-row {
@@ -406,7 +410,9 @@ a:hover {
   color: var(--text-secondary);
   padding: 2.5rem 0 5rem;
   text-align: justify;
-  hyphens: auto;
+  text-justify: inter-word;
+  hyphens: manual;
+  overflow-wrap: break-word;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
