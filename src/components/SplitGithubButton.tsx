@@ -26,8 +26,8 @@ export function SplitGithubButton() {
     <div
       ref={containerRef}
       className={`split-github-wrapper ${isOpen ? 'is-split' : ''}`}
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      onPointerEnter={(e) => { if (e.pointerType !== 'touch') setIsOpen(true); }}
+      onPointerLeave={(e) => { if (e.pointerType !== 'touch') setIsOpen(false); }}
       role="region"
       aria-label="GitHub Profiles"
     >

@@ -168,6 +168,39 @@ Use `>` for important callouts or key insights:
 > Always pre-provision topics with explicit partition counts and retention policies.
 ```
 
+### Reading Progress Checkpoints
+
+For posts longer than ~10 minutes, you can add **1–3 section break markers** so readers can save their place and return later without losing their position.
+
+**Syntax** — place `<!-- checkpoint -->` on its own line between two major sections:
+
+```md
+### Flow 3: CDC Pipeline
+
+... section content ...
+
+---
+
+<!-- checkpoint -->
+
+### Flow 4: Workforce Coordination
+```
+
+**Rules:**
+- Maximum **3 checkpoints per post**. If the natural sections are small, merge related sections into a single chunk rather than adding a checkpoint after every heading.
+- Place the marker **after** the `---` horizontal rule and **before** the next `##` or `###` heading.
+- Do not place inside a code block, list, or table.
+- The `<!-- checkpoint -->` comment is stripped from the rendered HTML and replaced with a "Save progress · Browse other notes →" button visible on the live page.
+
+**What happens at runtime:**
+1. Reader clicks the checkpoint button → their position is saved to `localStorage` → they navigate to the home page.
+2. Reader opens the same post again → a blue "You saved your reading progress here" banner appears → clicking "Continue reading ↓" scrolls them to that section.
+3. Reader finishes the post and clicks "More Engineering Notes" at the bottom → saved progress is cleared automatically.
+
+**For AI-authored posts:** the AI model reading this guide should identify the 2–3 largest natural conceptual breaks and place `<!-- checkpoint -->` there. A 16-minute post needs 2. A 25-minute post needs 3.
+
+**For manually authored posts:** place `<!-- checkpoint -->` wherever you feel the reader has completed a self-contained unit of learning and would benefit from a natural pause point.
+
 ---
 
 ## 6. Design System

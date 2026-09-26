@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getAllPosts, getAllTags } from '@/lib/posts';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { SearchBar } from '@/components/SearchBar';
+import { HLDModal } from '@/components/HLDModal';
 
 export default function HomePage() {
   const posts = getAllPosts(); // already sorted newest-first
@@ -33,9 +34,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* ─── Search Bar ────────────────────────────────────────────── */}
-          <div style={{ marginTop: '1.75rem' }}>
+          {/* ─── Search Bar + Architecture HLD button ─────────────────── */}
+          <div style={{ marginTop: '1.75rem', display: 'flex', alignItems: 'flex-start', gap: '0.65rem', flexWrap: 'wrap' }}>
             <SearchBar posts={posts} />
+            <HLDModal />
           </div>
         </div>
       </section>
