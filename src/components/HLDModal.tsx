@@ -38,8 +38,14 @@ function FlowBox({ label, sub, color }: { label: string; sub: string; color: Box
 }
 
 function FlowArrow() {
+  // SVG arrow instead of Unicode ──► which renders with a gap in some fonts
   return (
-    <span className="hld-flow-arrow" style={{ color: "var(--text-muted)", fontSize: "0.9rem", flexShrink: 0 }}>──►</span>
+    <span className="hld-flow-arrow" style={{ flexShrink: 0, display: "inline-flex", alignItems: "center", color: "var(--text-muted)" }}>
+      <svg width="28" height="12" viewBox="0 0 28 12" fill="none" aria-hidden="true">
+        <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <polyline points="17,2 23,6 17,10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      </svg>
+    </span>
   );
 }
 
@@ -123,41 +129,22 @@ function ArchDiagram() {
         lineHeight: 1.65,
         color: "var(--text-secondary)",
       }}>
-        <div style={{
-          fontWeight: 700,
-          color: "var(--text-primary)",
-          marginBottom: "0.55rem",
-          fontSize: "0.78rem",
-        }}>
+        <div style={{ fontWeight: 700, color: "var(--text-primary)", marginBottom: "0.55rem", fontSize: "0.78rem" }}>
           Why not Qdrant / Pinecone / Neo4j?
         </div>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "auto 1fr",
-          gap: "0.25rem 0.8rem",
-          alignItems: "start",
-        }}>
-          <span style={{ color: "#F59E0B", fontWeight: 700, whiteSpace: "nowrap" }}>
-            Qdrant / Pinecone
-          </span>
-          <span>
-            Vector API server required. GitHub Pages has no server runtime — adding one
-            costs $10–70/mo plus an ingestion pipeline for a personal blog with &lt;100 posts.
-          </span>
-          <span style={{ color: "#F59E0B", fontWeight: 700, whiteSpace: "nowrap" }}>
-            Neo4j
-          </span>
-          <span>
-            Graph traversal is powerful for relation queries, not fuzzy full-text ranking.
-            Still needs a server. Incompatible with static export.
-          </span>
-          <span style={{ color: "#10B981", fontWeight: 700, whiteSpace: "nowrap" }}>
-            Orama ✅
-          </span>
-          <span>
-            Pure browser runtime — no API calls, no infrastructure, no cost. Fuzzy match,
-            field-weight boosting, instant results at every keystroke.
-          </span>
+        {/* Each entry owns its own 2-col grid so mobile can collapse to
+            flex-column without orphaned cells from a shared flat grid */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          {([
+            { label: "Qdrant / Pinecone", color: "#F59E0B", text: "Vector API server required. GitHub Pages has no server runtime — adding one costs $10–70/mo plus an ingestion pipeline for a personal blog with <100 posts." },
+            { label: "Neo4j",             color: "#F59E0B", text: "Graph traversal is powerful for relation queries, not fuzzy full-text ranking. Still needs a server. Incompatible with static export." },
+            { label: "Orama ✅",          color: "#10B981", text: "Pure browser runtime — no API calls, no infrastructure, no cost. Fuzzy match, field-weight boosting, instant results at every keystroke." },
+          ] as const).map(({ label, color, text }) => (
+            <div key={label} className="hld-why-entry">
+              <span className="hld-why-label" style={{ color, fontWeight: 700, whiteSpace: "nowrap" }}>{label}</span>
+              <span>{text}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -191,9 +178,21 @@ export function HLDModal() {
       <style>{`
         @keyframes hldFadeIn  { from { opacity: 0; } to { opacity: 1; } }
         @keyframes hldSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        /* Pipeline: column layout on phones */
         @media (max-width: 580px) {
           .hld-pipeline-row { flex-direction: column !important; align-items: stretch !important; }
           .hld-flow-arrow   { display: none !important; }
+        }
+        /* Why-not: label | description on desktop; label above description on mobile */
+        .hld-why-entry {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          gap: 0.2rem 0.75rem;
+          align-items: start;
+        }
+        @media (max-width: 480px) {
+          .hld-why-entry  { display: flex !important; flex-direction: column !important; gap: 0.15rem !important; }
+          .hld-why-label  { white-space: normal !important; }
         }
       `}</style>
 
