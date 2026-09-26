@@ -132,7 +132,6 @@ export function SearchBar({ posts }: SearchBarProps) {
       {/* ── Search Input — conic-gradient rainbow border (Gemini-style) ── */}
       <div
         className="search-border-glow"
-        style={{ boxShadow: isOpen ? "0 0 0 4px var(--accent-subtle)" : undefined }}
       >
         <div
           style={{
@@ -140,8 +139,11 @@ export function SearchBar({ posts }: SearchBarProps) {
             alignItems: "center",
             gap: "0.6rem",
             background: "var(--bg-surface)",
+            border: "1px solid var(--border-strong)",
             borderRadius: "0.65rem",
             padding: "0.65rem 1rem",
+            transition: "box-shadow 0.2s ease",
+            boxShadow: isOpen ? "0 0 0 3px var(--accent-subtle)" : "var(--shadow-sm)",
             position: "relative",
             zIndex: 1,
           }}
